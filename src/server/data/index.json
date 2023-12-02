@@ -4,7 +4,7 @@
         "original_title": "Harry Potter and the Sorcerer's Stone",
         "title_ptBR": "Harry Potter e a Pedra Filosofal",
         "type": "movie",
-        "genre": ["fantasy"],
+        "genres": ["fantasy"],
         "year": 2001,
         "duration": 152,
         "director": ["Chris Columbus"]
@@ -14,7 +14,7 @@
         "original_title": "Frozen",
         "title_ptBR": "Frozen - Uma Aventura Congelante",
         "type": "movie",
-        "genre": ["animation"],
+        "genres": ["animation"],
         "year": 2013,
         "duration": 102,
         "director": ["Chris Buck", "Jennifer Lee"]
@@ -24,7 +24,7 @@
         "original_title": "Alice in Wonderland",
         "title_ptBR": "Alice no País das Maravilhas",
         "type": "movie",
-        "genre": ["fantasy", "adventure"],
+        "genres": ["fantasy", "adventure"],
         "year": 2010,
         "duration": 108,
         "director": ["Tim Burton"]
@@ -34,7 +34,7 @@
         "original_title": "The Chronicles of Narnia: The Lion, the Witch and the Wardrobe",
         "title_ptBR": "As Crônicas de Nárnia: O Leão, a Feiticeira e o Guarda-Roupa",
         "type": "movie",
-        "genre": ["fantasy", "adventure"],
+        "genres": ["fantasy", "adventure"],
         "year": 2005,
         "duration": 143,
         "director": ["Andrew Adamson"]
@@ -44,7 +44,7 @@
         "orginal_title": "To All the Boys: P.S. I Still Love You",
         "title_ptBR": "Para Todos os Garotos: P.S. Ainda Amo Você",
         "type": "movie",
-        "genre": ["romance", "comedy"],
+        "genres": ["romance", "comedy"],
         "year": 2020,
         "duration": 101,
         "director": ["Michael Fimognari"]
@@ -54,7 +54,7 @@
         "original_title": "The Hunger Games",
         "title_ptBR": "Jogos Vorazes",
         "type": "movie",
-        "genre": ["action", "adventure", "sci-fi"],
+        "genres": ["action", "adventure", "sci-fi"],
         "year": 2012,
         "duration": 142,
         "director": ["Gary Ross"]
@@ -64,7 +64,7 @@
         "original_title": "How to Train Your Dragon",
         "title_ptBR": "Como Treinar o Seu Dragão",
         "type": "movie",
-        "genre": ["animation", "adventure", "action"],
+        "genres": ["animation", "adventure", "action"],
         "year": 2010,
         "duration": 98,
         "director": ["Dean DeBlois", "Chris Sanders"]
@@ -75,7 +75,7 @@
         "original_title": "How to Train Your Dragon 2",
         "title_ptBR": "Como Treinar o Seu Dragão 2",
         "type": "movie",
-        "genre": ["animation", "adventure", "action"],
+        "genres": ["animation", "adventure", "action"],
         "year": 2014,
         "duration": 102,
         "director": ["Dean DeBlois"]
@@ -85,7 +85,7 @@
         "original_title": "The Lord of the Rings: The Fellowship of the Ring",
         "title_ptBR": "O Senhor dos Anéis: A Sociedade do Anel",
         "type": "movie",
-        "genre": ["adventure", "fantasy"],
+        "genres": ["adventure", "fantasy"],
         "year": 2001,
         "duration": 178,
         "director": ["Peter Jackson"]
@@ -95,7 +95,7 @@
         "original_title": "The Lord of the Rings: The Two Towers",
         "title_ptBR": "O Senhor dos Anéis: As Duas Torres",
         "type": "movie",
-        "genre": ["adventure", "fantasy"],
+        "genres": ["adventure", "fantasy"],
         "year": 2002,
         "duration": 179,
         "director": ["Peter Jackson"]
@@ -105,7 +105,7 @@
         "original_title": "The Lord of the Rings: The Return of the King",
         "title_ptBR": "O Senhor dos Anéis: O Retorno do Rei",
         "type": "movie",
-        "genre": ["adventure", "fantasy"],
+        "genres": ["adventure", "fantasy"],
         "year": 2003,
         "duration": 201,
         "director": ["Peter Jackson"]
@@ -115,7 +115,7 @@
         "original_title": "Under the Dome",
         "title_ptBR": "O Domo",
         "type": "tv show",
-        "genre": [
+        "genres": [
             "Drama",
             "Science-Fiction",
             "Thriller"
@@ -129,7 +129,7 @@
         "original_title": "The 100",
         "title_ptBR": "Os 100",
         "type": "tv show",
-        "genre": [
+        "genres": [
             "Drama",
             "Science-Fiction",
             "Thriller"
@@ -143,7 +143,7 @@
         "original_title": "The Vampire Diaries",
         "title_ptBR": "Diários de um Vampiro",
         "type": "tv show",
-        "genre": [
+        "genres": [
             "Drama",
             "Fantasy",
             "Horror"
@@ -157,7 +157,7 @@
         "original_title": "The Originals",
         "title_ptBR": "Os Originais",
         "type": "tv show",
-        "genre": [
+        "genres": [
             "Drama",
             "Fantasy",
             "Horror"
@@ -171,7 +171,7 @@
         "original_title": "The Walking Dead",
         "title_ptBR": "The Walking Dead",
         "type": "tv show",
-        "genre": [
+        "genres": [
             "Drama",
             "Horror",
             "Thriller"
@@ -185,7 +185,7 @@
         "original_title": "Glee",
         "title_ptBR": "Glee",
         "type": "tv show",
-        "genre": [
+        "genres": [
             "Comedy",
             "Drama",
             "Music"
@@ -199,7 +199,7 @@
         "original_title": "The Big Bang Theory",
         "title_ptBR": "The Big Bang Theory",
         "type": "tv show",
-        "genre": [
+        "genres": [
             "Comedy",
             "Romance"
         ],
@@ -212,7 +212,7 @@
         "original_title": "Friends",
         "title_ptBR": "Friends",
         "type": "tv show",
-        "genre": [
+        "genres": [
             "Comedy",
             "Romance"
         ],
@@ -225,7 +225,7 @@
         "original_title": "Grey's Anatomy",
         "title_ptBR": "Grey's Anatomy",
         "type": "tv show",
-        "genre": [
+        "genres": [
             "Drama",
             "Romance"
         ],
@@ -238,7 +238,7 @@
         "original_title": "The Good Place",
         "title_ptBR": "The Good Place",
         "type": "tv show",
-        "genre": [
+        "genres": [
             "Comedy",
             "Drama",
             "Fantasy"
@@ -252,7 +252,7 @@
         "orginal_title": "Game of Thrones",
         "title_ptBR": "Game of Thrones",
         "type": "tv show",
-        "genre": [
+        "genres": [
             "Drama",
             "Adventure",
             "Fantasy"
