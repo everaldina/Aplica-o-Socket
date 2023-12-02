@@ -1,0 +1,268 @@
+[
+    {
+        "id": 1,
+        "original_title": "Harry Potter and the Sorcerer's Stone",
+        "title_ptBR": "Harry Potter e a Pedra Filosofal",
+        "type": "movie",
+        "genre": ["fantasy"],
+        "year": 2001,
+        "duration": 152,
+        "director": ["Chris Columbus"]
+    },
+    {
+        "id": 2,
+        "original_title": "Frozen",
+        "title_ptBR": "Frozen - Uma Aventura Congelante",
+        "type": "movie",
+        "genre": ["animation"],
+        "year": 2013,
+        "duration": 102,
+        "director": ["Chris Buck", "Jennifer Lee"]
+    },
+    {
+        "id": 3,
+        "original_title": "Alice in Wonderland",
+        "title_ptBR": "Alice no País das Maravilhas",
+        "type": "movie",
+        "genre": ["fantasy", "adventure"],
+        "year": 2010,
+        "duration": 108,
+        "director": ["Tim Burton"]
+    },
+    {
+        "id": 4,
+        "original_title": "The Chronicles of Narnia: The Lion, the Witch and the Wardrobe",
+        "title_ptBR": "As Crônicas de Nárnia: O Leão, a Feiticeira e o Guarda-Roupa",
+        "type": "movie",
+        "genre": ["fantasy", "adventure"],
+        "year": 2005,
+        "duration": 143,
+        "director": ["Andrew Adamson"]
+    },
+    {
+        "id": 5,
+        "orginal_title": "To All the Boys: P.S. I Still Love You",
+        "title_ptBR": "Para Todos os Garotos: P.S. Ainda Amo Você",
+        "type": "movie",
+        "genre": ["romance", "comedy"],
+        "year": 2020,
+        "duration": 101,
+        "director": ["Michael Fimognari"]
+    },
+    {
+        "id": 6,
+        "original_title": "The Hunger Games",
+        "title_ptBR": "Jogos Vorazes",
+        "type": "movie",
+        "genre": ["action", "adventure", "sci-fi"],
+        "year": 2012,
+        "duration": 142,
+        "director": ["Gary Ross"]
+    },
+    {
+        "id": 7,
+        "original_title": "How to Train Your Dragon",
+        "title_ptBR": "Como Treinar o Seu Dragão",
+        "type": "movie",
+        "genre": ["animation", "adventure", "action"],
+        "year": 2010,
+        "duration": 98,
+        "director": ["Dean DeBlois", "Chris Sanders"]
+
+    },
+    {
+        "id": 8,
+        "original_title": "How to Train Your Dragon 2",
+        "title_ptBR": "Como Treinar o Seu Dragão 2",
+        "type": "movie",
+        "genre": ["animation", "adventure", "action"],
+        "year": 2014,
+        "duration": 102,
+        "director": ["Dean DeBlois"]
+    },
+    {
+        "id": 9,
+        "original_title": "The Lord of the Rings: The Fellowship of the Ring",
+        "title_ptBR": "O Senhor dos Anéis: A Sociedade do Anel",
+        "type": "movie",
+        "genre": ["adventure", "fantasy"],
+        "year": 2001,
+        "duration": 178,
+        "director": ["Peter Jackson"]
+    },
+    {
+        "id": 10,
+        "original_title": "The Lord of the Rings: The Two Towers",
+        "title_ptBR": "O Senhor dos Anéis: As Duas Torres",
+        "type": "movie",
+        "genre": ["adventure", "fantasy"],
+        "year": 2002,
+        "duration": 179,
+        "director": ["Peter Jackson"]
+    },
+    {
+        "id": 11,
+        "original_title": "The Lord of the Rings: The Return of the King",
+        "title_ptBR": "O Senhor dos Anéis: O Retorno do Rei",
+        "type": "movie",
+        "genre": ["adventure", "fantasy"],
+        "year": 2003,
+        "duration": 201,
+        "director": ["Peter Jackson"]
+    },
+    {
+        "id": 12,
+        "original_title": "Under the Dome",
+        "title_ptBR": "O Domo",
+        "type": "tv show",
+        "genre": [
+            "Drama",
+            "Science-Fiction",
+            "Thriller"
+        ],
+        "premiered": "2013-06-24",
+        "seasons": 3,
+        "creator": "Brian K. Vaughan"
+    },
+    {
+        "id": 13,
+        "original_title": "The 100",
+        "title_ptBR": "Os 100",
+        "type": "tv show",
+        "genre": [
+            "Drama",
+            "Science-Fiction",
+            "Thriller"
+        ],
+        "premiered": "2014-03-19",
+        "seasons": 7,
+        "creator": "Jason Rothenberg"
+    },
+    {
+        "id": 14,
+        "original_title": "The Vampire Diaries",
+        "title_ptBR": "Diários de um Vampiro",
+        "type": "tv show",
+        "genre": [
+            "Drama",
+            "Fantasy",
+            "Horror"
+        ],
+        "premiered": "2009-09-10",
+        "seasons": 8,
+        "creator": "Julie Plec"
+    },
+    {
+        "id": 15,
+        "original_title": "The Originals",
+        "title_ptBR": "Os Originais",
+        "type": "tv show",
+        "genre": [
+            "Drama",
+            "Fantasy",
+            "Horror"
+        ],
+        "premiered": "2013-10-03",
+        "seasons": 5,
+        "creator": "Julie Plec"
+    },
+    {
+        "id": 16,
+        "original_title": "The Walking Dead",
+        "title_ptBR": "The Walking Dead",
+        "type": "tv show",
+        "genre": [
+            "Drama",
+            "Horror",
+            "Thriller"
+        ],
+        "premiered": "2010-10-31",
+        "seasons": 10,
+        "creator": "Frank Darabont"
+    },
+    {
+        "id": 17,
+        "original_title": "Glee",
+        "title_ptBR": "Glee",
+        "type": "tv show",
+        "genre": [
+            "Comedy",
+            "Drama",
+            "Music"
+        ],
+        "premiered": "2009-05-19",
+        "seasons": 6,
+        "creator": "Ryan Murphy"
+    },
+    {
+        "id": 18,
+        "original_title": "The Big Bang Theory",
+        "title_ptBR": "The Big Bang Theory",
+        "type": "tv show",
+        "genre": [
+            "Comedy",
+            "Romance"
+        ],
+        "premiered": "2007-09-24",
+        "seasons": 12,
+        "creator": "Chuck Lorre"
+    },
+    {
+        "id": 19,
+        "original_title": "Friends",
+        "title_ptBR": "Friends",
+        "type": "tv show",
+        "genre": [
+            "Comedy",
+            "Romance"
+        ],
+        "premiered": "1994-09-22",
+        "seasons": 10,
+        "creator": "David Crane"
+    },
+    {
+        "id": 20,
+        "original_title": "Grey's Anatomy",
+        "title_ptBR": "Grey's Anatomy",
+        "type": "tv show",
+        "genre": [
+            "Drama",
+            "Romance"
+        ],
+        "premiered": "2005-03-27",
+        "seasons": 16,
+        "creator": "Shonda Rhimes"
+    },
+    {
+        "id": 21,
+        "original_title": "The Good Place",
+        "title_ptBR": "The Good Place",
+        "type": "tv show",
+        "genre": [
+            "Comedy",
+            "Drama",
+            "Fantasy"
+        ],
+        "premiered": "2016-09-19",
+        "seasons": 4,
+        "creator": "Michael Schur"
+    },
+    {
+        "id": 22,
+        "orginal_title": "Game of Thrones",
+        "title_ptBR": "Game of Thrones",
+        "type": "tv show",
+        "genre": [
+            "Drama",
+            "Adventure",
+            "Fantasy"
+        ],
+        "premiered": "2011-04-17",
+        "seasons": 8,
+        "creator": "David Benioff"
+    }
+
+
+]
+
+
