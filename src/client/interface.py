@@ -1,5 +1,6 @@
 import os
-from client import searchFile
+from client import searchFile, streamFile
+import json
 
 def main():
     # menu principal
@@ -15,21 +16,51 @@ def main():
             
         busca = menu(opc)
         
-        if busca is not None:
-            match opc:
-                case "1":
-                    procura_por = "titulo"
-                case "2":
-                    procura_por = "genero"
-                case "3":
-                    procura_por = "ano"
-                case "4":
-                    procura_por = "diretor"
-                case "5":
-                    procura_por = "tipo"
-        lista = searchFile(busca, procura_por)
-        for i in lista:
-            print(i)
+        if busca is None:
+            continue
+            
+        match opc:
+            case "1":
+                procura_por = "titulo"
+            case "2":
+                procura_por = "genero"
+            case "3":
+                procura_por = "ano"
+            case "4":
+                procura_por = "diretor"
+            case "5":
+                procura_por = "tipo"
+        list = searchFile(busca, procura_por)
+        
+        limpar_terminal()
+        logo_pequena()
+        print(f"-------Resultados-------")
+        ids = print_media(list)
+        if len(ids) == 0:
+            print("Nenhum resultado encontrado")
+            input()
+            limpar_terminal()
+            continue
+        else:
+            id_selected = input("Selecione o id para assistir ou 0 para voltar: ")
+            if id_selected == "0":
+                continue
+            if id_selected not in ids:
+                print("Opcao invalida")
+                input()
+                limpar_terminal()
+                continue
+            else:
+                limpar_terminal()
+                for i in list:
+                    if str(i["id"]) == id_selected:
+                        selected = i
+                        break
+                print(f"Assistindo {selected['title_ptBR']}")
+                streamFile(id_selected)
+                print("Fim.......")
+                input("Pressione enter para voltar ao menu principal......")
+                limpar_terminal()
                     
         
         
@@ -73,6 +104,11 @@ def menu(opc):
                 busca = "filme"
             elif opc == 2:
                 busca = "serie"
+            else:
+                print("Opcao invalida")
+                input()
+                limpar_terminal()
+                return
         else:
             busca = input(f"Digite o {tipo[opc-1]}: ")
         return busca
@@ -87,6 +123,19 @@ def limpar_terminal():
     else:
         print()
 
+
+def print_media(list):
+    ids = []
+    for i in list:
+        print(f'{i["id"]} - \t{i["title_ptBR"]} ({i["original_title"]})')
+        if i["type"] == "movie":
+            print("\t   - Filme")
+            print(f'\t   - Ano: {i["year"]}\n\t   - Duracao{i["duration"]} min')
+        else:
+            print("\t   - Serie")
+            print(f'\t   - Lancamento: {i["premiered"].split("-")[0]}\n\t   - {i["seasons"]} temporadas')
+        ids.append(str(i["id"]))
+    return ids
 
 def logo_grande():
     print("\n")

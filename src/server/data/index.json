@@ -41,7 +41,7 @@
     },
     {
         "id": 5,
-        "orginal_title": "To All the Boys: P.S. I Still Love You",
+        "original_title": "To All the Boys: P.S. I Still Love You",
         "title_ptBR": "Para Todos os Garotos: P.S. Ainda Amo Você",
         "type": "movie",
         "genres": ["romance", "comedy"],
@@ -249,7 +249,7 @@
     },
     {
         "id": 22,
-        "orginal_title": "Game of Thrones",
+        "original_title": "Game of Thrones",
         "title_ptBR": "Game of Thrones",
         "type": "tv show",
         "genres": [

@@ -28,7 +28,7 @@ searchDirector = lambda x, search: [i for i in x if search in i["director"] or s
 searchTitle = lambda x, search: [i for i in x if search in i["original_title"] or search in i["title_ptBR"]]
 searchGenre = lambda x, search: [i for i in x if search in i["genres"]]
 
-def searchFile(search, type):
+def searchFiles(search, type):
     current_dir = os.path.dirname(os.path.abspath(__file__))
     file_path = os.path.join(current_dir, "data/index.json")
     list = []
@@ -46,7 +46,17 @@ def searchFile(search, type):
         results = searchDirector(list, search)
     elif type == "tipo": 
         results = searchType(list, search)
-        
+    
+    #for i in results:
+    #    print(i)
     return results
+
+def searchFile(id):
+    current_dir = os.path.dirname(os.path.abspath(__file__))
+    file_path = os.path.join(current_dir, f"data/{id}/file.txt")
+    
+    with open(file_path) as file:
+        data = file.read()
+        return data
     
     

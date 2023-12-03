@@ -14,14 +14,19 @@ def searchFile(search, type):
     list = []
     
     # Envia o tipo de operacao que ira ser realizada
-    s.send("search".encode())
+    s.send("search---".encode())
     
     # Envia os dados da busca
     s.send(search.encode())
+    s.send("---".encode())
     s.send(type.encode())
     
     # Recebe o tamanho dos dados
-    data_size = int(s.recv(1024).decode())
+    try:
+        data_size = int(s.recv(1024).decode())
+    except:
+        print("Erro ao receber tamanho dos dados")
+        return list
 
     # Envia confirmação a servidor indicando que está pronto para receber os dados
     s.send(b'OK')
@@ -44,3 +49,24 @@ def searchFile(search, type):
 
     s.close()
     return list
+
+def streamFile(id):
+    s = createConection("127.0.0.1", 12345)
+    
+    # Envia o tipo de operacao que ira ser realizada
+    s.send("stream---".encode())
+    
+    # Envia id da midia
+    s.send(id.encode())
+    
+    # Recebe o tamanho dos dados e manda confirmação de que está pronto para receber
+    size = int(s.recv(1024).decode())
+    s.send(b'OK')
+    
+    # Recebe os dados em partes e assiste (imprime) eles
+    stream_size = 0
+    while stream_size < size:
+        data = s.recv(1024).decode()
+        stream_size += len(data)
+        print(data, end='')
+        input(end = '')
