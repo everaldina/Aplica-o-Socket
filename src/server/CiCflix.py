@@ -11,8 +11,19 @@ def searchYear(index, search):
         else:
             if search == str(i["year"]):
                 list.append(i)
+                
+def searchType(index, search):
+    if search == "filme":
+        search = "movie"
+    elif search == "serie":
+        search = "tv show"
+        
+    list = []
+    for i in index:
+        if i["type"] == search:
+            list.append(i)
+    return list
             
-searchType = lambda x, search: [i for i in x if i["type"] == search]
 searchDirector = lambda x, search: [i for i in x if search in i["director"] or search in i["creator"]]
 searchTitle = lambda x, search: [i for i in x if search in i["original_title"] or search in i["title_ptBR"]]
 searchGenre = lambda x, search: [i for i in x if search in i["genres"]]

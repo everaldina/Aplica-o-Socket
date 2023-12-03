@@ -1,4 +1,5 @@
 import os
+from client import searchFile
 
 def main():
     # menu principal
@@ -26,6 +27,9 @@ def main():
                     procura_por = "diretor"
                 case "5":
                     procura_por = "tipo"
+        lista = searchFile(busca, procura_por)
+        for i in lista:
+            print(i)
                     
         
         
@@ -33,6 +37,7 @@ def main():
         
     
 def menu(opc):
+    tipo = ["titulo", "genero", "ano", "diretor", "tipo"]
     textos = ["BUSCA POR TITULO", "BUSCA POR GENERO", "BUSCA POR ANO", "BUSCA POR DIRETOR", "BUSCA POR TIPO"]
     
     try:
@@ -68,7 +73,8 @@ def menu(opc):
                 busca = "filme"
             elif opc == 2:
                 busca = "serie"
-        busca = input("Digite o titulo: ")
+        else:
+            busca = input(f"Digite o {tipo[opc-1]}: ")
         return busca
 
 def limpar_terminal():
