@@ -2,63 +2,81 @@ import socket
 from CiCflix import searchFiles, searchFile
 import json
 
-# 1: Criar o socket
+#1: Criar o socket TCP/IP
 host = '127.0.0.1'
-porta = 12345
+port = 12345
 servidor_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-servidor_socket.bind((host, porta))
+servidor_socket.bind((host, port))
 
 
 # 2: Escutar
 servidor_socket.listen()
 
 while(1):
-    conexao, endereco_cliente = servidor_socket.accept()
-    print("Conectado com: ", endereco_cliente)
+    # 3: Aceitar conexão
+    client_connection, client_address = servidor_socket.accept()
+    print("Conectado com: ", client_address)
 
 
-    # Recebe o nome do arquivo
-    stream = conexao.recv(1024).decode().split("---")
-    if(stream[0] == "search"):
-        list = []
+    # Recebe stream de dados
+    stream = client_connection.recv(1024).decode().split("---")
+    
+    if(stream[0] == "search"): # Se for uma solicitação de busca
         search = stream[1]
         type = stream[2]
+        
+        # list com os dados buscados por uma categoria 'type' com o termo 'search'
+        list = []
         list = searchFiles(search, type)
-        json_data = json.dumps(list)
+        json_data = json.dumps(list) # transforma a lista em um json
         
         # Envia o tamanho dos dados
+        print("Enviando tamanho dos dados")
         data_size = len(json_data)
-        conexao.send(str(data_size).encode())
+        client_connection.send(str(data_size).encode())
 
         # Aguarda retorno do cliente para envio dos dados
-        conexao.recv(1024)  # Pode ser uma confirmação simples
+        print("Aguardando retorno do cliente para envio dos dados")
+        client_connection.recv(1024)
+        
         # Envia os dados em partes
         for i in range(0, data_size, 1024):
             part = json_data[i:i+1024]
-            conexao.send(part.encode())
-        conexao.close()
+            client_connection.send(part.encode())
         
-    elif(stream[0] == "stream"):
+        # Aguarda confirmação de que os dados foram recebidos
+        if(client_connection.recv(1024).decode() == "DONE"):
+            print("Dados enviados")
+            print("Fechando conexao com ", client_address)
+        else:
+            print("Erro ao enviar dados")
+
+        client_connection.close() # fecha a conexão
+        
+    elif(stream[0] == "stream"): # se for uma solicitaçao de stream
+        # procura o arquivo com o id passado
         id = stream[1]
         data = searchFile(id)
-        conexao.send(str(len(data)).encode())
-        conexao.recv(1024)
         
+        # envia o tamanho do arquivo
+        data_size = len(data)
+        client_connection.send(str(data_size)).encode()
+        
+        # Aguarda retorno do cliente para envio dos dados
+        client_connection.recv(1024)
+        
+        # Envia os dados em partes
         for i in range(0, len(data), 1024):
             part = data[i:i+1024]
-            conexao.send(part.encode())
-            
-        conexao.close()
+            client_connection.send(part.encode())
+        
+        # fecha a conexão com o cliente
+        client_connection.close()
+    elif(stream[0] == "end"): # se for uma solicitação de encerramento
+        print(f"Fechando conexao com {client_address}")
+        client_connection.close()
+        print("Fechando socket do servidor")
         servidor_socket.close()
-    else:
-        conexao.send("ERRO".encode())
-        conexao.close()
-        servidor_socket.close()
-
-    # Abre o arquivo para escrita binária
-    #with open(nome_arquivo, 'wb') as arquivo:
-    #    while True:
-    #        dados = conexao.recv(1024)
-    #        if not dados:
-    #            break
-    #        arquivo.write(dados)
+    else: # se for um stream desconhecido
+        print("Erro: Comando desconhecido")
+        client_connection.close()
