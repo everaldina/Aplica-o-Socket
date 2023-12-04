@@ -8,13 +8,19 @@ def createConection():
     host = "127.0.0.1"
     port = 12345
     
+    # criar socket
     client_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 
-    # 4: Conectar
+    # se conectar ao servidor
     client_socket.connect((host, port))
     return client_socket
 
 def searchFile(search, type):
+    ''' 
+        Envia uma solicitação de busca ao servidor, com um termo de busca 'search' e 
+        o tipo de busca 'type', retorna uma lista com os resultados
+    '''
+    
     connection = createConection() # Cria conexão com o servidor
 
     
@@ -28,12 +34,12 @@ def searchFile(search, type):
     
     
     list = []
+    
     # Recebe o tamanho dos dados
     try:
         data_size = int(connection.recv(1024).decode())
     except:
-        print("Erro ao receber tamanho dos dados")
-        return list
+        raise Exception("Erro ao conectar com o servidor")
 
     # Envia confirmação a servidor indicando que está pronto para receber os dados
     connection.send(b'OK')
@@ -44,7 +50,7 @@ def searchFile(search, type):
         part = connection.recv(1024).decode()
         json_data += part
         
-    # Envia confirmação a servidor indicando que os dados foram recebidos
+    # Envia confirmação ao servidor indicando que os dados foram recebidos
     connection.send(b'DONE')
     
     # transforma os dados recebidos em uma lista
@@ -54,6 +60,8 @@ def searchFile(search, type):
     return list
 
 def streamFile(id):
+    ''' Recebe um id de midia, se conecta ao servidor e recebe a midia com o id especificado'''
+    
     connection = createConection() # Cria conexão com o servidor
     
     # Envia o tipo de operacao que ira ser realizada
@@ -63,8 +71,11 @@ def streamFile(id):
     connection.send(id.encode())
     
     # Recebe o tamanho dos dados e manda confirmação de que está pronto para receber
-    size = int(connection.recv(1024).decode())
-    connection.send(b'OK')
+    try:
+        size = int(connection.recv(1024).decode())
+        connection.send(b'OK')
+    except:
+        raise Exception("Erro ao conectar com o servidor")
     
     # Recebe os dados em partes e assiste (imprime) eles
     stream_size = 0
@@ -73,6 +84,9 @@ def streamFile(id):
         stream_size += len(data)
         print(data, end='')
         input()
+    
+    # Envia confirmação a servidor indicando que os dados foram recebidos
+    connection.send(b'DONE')
         
 def closeServer():
     ''' Envia uma mensagem ao servidor para que ele feche o socket'''
