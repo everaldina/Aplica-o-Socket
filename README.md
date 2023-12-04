@@ -1,5 +1,5 @@
 # Aplicacao-Socket
-## Aplicação
+## Proposito do Software
 O projeto simula um streaming, o cliente faz uma busca e então o servidor retornar os resultados que batem com a busca, o cliente pode solicitar ver um item em específico e o servidor iria enviar o arquivo para ele.
 
 A pasta `server` contém os código do servidor e a pasta `client` contém os código do cliente.
@@ -15,23 +15,23 @@ Na pasta dados existe um arquivo chamado `index.json`, ele contém os indices do
 
 No cada item tem:
 
-    - `id`: O id do item.
-    - `original_title`: O titulo original do item.
-    - `title_ptBR`: O nome em portugues do item.
-    - `type`: O tipo do item, podendo ser 'filme' ou 'serie'.
-    - `genres`: Uma lista de generos do filme.
+ - `id`: O id do item.
+ - `original_title`: O titulo original do item.
+ - `title_ptBR`: O nome em portugues do item.
+ - `type`: O tipo do item, podendo ser 'filme' ou 'serie'.
+ - `genres`: Uma lista de generos do filme.
   
 Existem divergencia de atributos entre filmes e séries, os atributos que são exclusivos de filmes são:
 
-    - `year`: O ano que o filme foi lançado.
-    - `duration`: A duração em minutos do filme.
-    - `director`: Uma lista de diretores do filme.
+ - `year`: O ano que o filme foi lançado.
+ - `duration`: A duração em minutos do filme.
+ - `director`: Uma lista de diretores do filme.
   
 Os atributos que são exclusivos de séries são:
 
-    - `premiered`: A data de estreia da série, no formato 'YYYY-MM-DD'.
-    - `seasons`: O número de temporadas do item.
-    - `creator`: Uma lista de criadores da serie.
+ - `premiered`: A data de estreia da série, no formato 'YYYY-MM-DD'.
+ - `seasons`: O número de temporadas do item.
+ - `creator`: Uma lista de criadores da serie.
 
 Ainda na pasta de dados existem varias pastas com numeros como nome, cada pasta contém os arquivos de um item, o nome da pasta corresponde ao id do item. Dentro de cada uma dessas pastas de itens existe apenas um arquivo chamado `file.txt`, ele contém o conteúdo do arquivo que será enviado para o cliente e simula o streaming de um video.
 
@@ -54,45 +54,73 @@ A execução de cliente e servidor pode ser feita em computadores diferentes, pa
 ## Protocolo
 
 ### Visão Geral
+O protocolo é baseado em requisições e respostas, o cliente faz uma requisição e o servidor responde com os dados solicitados.
+
+Para implementar o protocolo foi utilizado o protocolo TCP/IP, pois ele garante a entrega dos dados e a ordem deles. 
 
 
-### Estrutura do Protocolo
+### Mensagens
+A tres tipos de mensagens, as de requisição, as de resposta e as de confirmação.
+- **Mensagens de requisição:** As requisições são feitas pelo cliente e tem um cabeçalho pra especificar que tipo de solicitação sera feita e com que parametros.
+  - Busca: search---"termo_de_busca"---"tipo_de_busca"
+    - termo_de_busca: Uma palavra que sera usada para fazer a busca, não pode conter "---".
+    - tipo_de_busca: "title" | "genre" | "year" | "director" | "type"
+  - Streaming: stream---"id"
+    - id: O id do item que o cliente quer ver.
+  - Sair: "end---"
+- **Mensagens de resposta:** Mensagens do servidor, que faz uma busca nos dados de acordo com solicitação do cliente e retorna os dados que batem com a busca. Uma das formas de resposta é o envio de um arquivo com indices de itens que batem com a busca, a outra forma é o envio do arquivo de um item que o cliente solicitou.
+- **Mensagens de confirmação:** Mensagens de confirmação são mensagens que o cliente envia para o servidor para confirmar que ele recebeu a mensagem do servidor. Isso acontece quando o servidor envia o tamanho dos dados de resposta e o cliente manda um OK, ou quando o servidor envia a resposta e o cliente manda um DONE.
 
-- **Arquitetura:** Explique a arquitetura geral do protocolo, incluindo como os dados são organizados e transmitidos.
+### Eventos e Estados
+#### Busca
+- **Estado Inicial**
+  - Ciente: Sem conexão com o servidor.
+  - Servidor: Em espera de uma requisição do cliente.
+- **Evento de Transição**
+  - Cliente: Manda um comando de busca com os parametros de tipo de busca e o termo de busca.
+- **Estado Final**
+  - Cliente: Com uma lista de indices de itens que batem com a busca e concexao com o servidor fechada.
+  - Servidor: Em espera de uma nova requisição.
+#### Streaming
+ - **Estado Inicial**
+   - Cliente: Com uma lista de indices de itens que batem com a busca feita. Sem conexão com o servidor.
+   - Servidor: Em espera de uma requisição.
+ - **Evento de Transição**
+   - Cliente: Manda um comando de streaming com o id do item que ele quer ver.
+ - **Estado Final**
+   - Cliente: Com o arquivo do item que ele queria ver e a conexão com o servidor fechada.
+   - Servidor: Em espera de uma nova conexão.
 
-### Formato de Mensagens
+#### Sair
+ - **Estado Inicial**
+   - Cliente: Sem conexão com o servidor.
+   - Servidor: Em espera de uma requisição.
+ - **Evento de Transição**
+   - Cliente: Manda um comando de sair.
+ - **Estado Final**
+   - Cliente: Com a conexão com o servidor e socket fechados.
+   - Servidor: Com socket fechado.
 
-- **Cabeçalhos e Corpos de Mensagem:** Descreva a estrutura de uma mensagem típica, incluindo informações sobre cabeçalhos, dados e metadados.
-- **Codificação de Dados:** Especifique como os dados são codificados nas mensagens (por exemplo, JSON, XML, binário).
 
-### Operações e Comandos
+### Exemplos de Execução
+Exemplo de execução para o cliente procurar um item por titulo com a palavra 'harry', selecionar o filme 'Harry Potter and the Sorcerer's Stone' com id 1 e então sair do programa.
 
-- **Lista de Operações:** Enumere todas as operações suportadas pelo protocolo.
-- **Descrição de Operações:** Forneça informações detalhadas sobre cada operação, incluindo os parâmetros esperados e os resultados retornados.
+1. Cliente: search---harry---title
+2. Servidor: <tamanho_da_resposta>
+3. Clientr: OK
+4. Servidor: [{"id": 1, "original_title": "Harry Potter and the Sorcerer's Stone", "title_ptBR": "Harry Potter e a Pedra Filosofal", "type": "filme", "genres": ["Adventure", "Fantasy", "Family"], "year": 2001, "duration": 152, "director": ["Chris Columbus"]}]
+5. Cliente: DONE
+--Fim da busca--
+1. Cliente: strem---1
+2. Servidor: <tamanho_do_arquivo>
+3. Cliente: OK
+4. Servidor: <arquivo>
+5. Cliente: DONE
+--Fim do streaming--
+6. Cliente: end---
 
-### Comportamento do Cliente e do Servidor
 
-- **Fluxo de Comunicação:** Ilustre os cenários de comunicação típicos entre clientes e servidores.
-- **Gestão de Conexão:** Explique como a conexão é estabelecida, mantida e encerrada.
-
-### Exemplos e Cenários
-
-- **Exemplos de Uso:** Forneça exemplos práticos de como usar o protocolo em diferentes situações.
-- **Cenários de Erro:** Descreva possíveis cenários de erro e como lidar com eles.
-
-### Segurança
-
-- **Considerações de Segurança:** Identifique as práticas recomendadas para garantir a segurança ao utilizar o protocolo.
-- **Criptografia:** Se necessário, explique como a criptografia é aplicada para proteger a comunicação.
-
-### Referência de API
-
-- **Lista de Funções ou Métodos:** Forneça uma referência clara de todas as funções ou métodos disponíveis para os desenvolvedores.
-
-### Configuração
-
-- **Parâmetros de Configuração:** Se houver parâmetros de configuração, liste-os e explique seu impacto na operação do protocolo.
-
-### Exigências do Ambiente
-
-- **Requisitos de Sistema:** Especifique os requisitos mínimos do sistema para implementar o protocolo.
+### Requisitos minimos de funcionamento
+ - O servidor deve esta executando para que o cliente funcione, não é necessario que o servidor tenha acesso a internet, mas precisa ter acesso a rede local para que o cliente consiga se conectar a ele.
+ - O servidor precisa ter acesso a pasta de dados para que ele consiga enviar os arquivos para o cliente.
+ - A conectividade pode ser feita apenas um cliente por vez.
