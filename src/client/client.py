@@ -74,7 +74,7 @@ def streamFile(id):
         print(data, end='')
         input()
         
-def closeSocket():
+def closeServer():
     ''' Envia uma mensagem ao servidor para que ele feche o socket'''
     connection = createConection()
     connection.send("end---".encode())

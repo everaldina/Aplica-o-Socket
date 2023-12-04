@@ -122,7 +122,7 @@
         ],
         "premiered": "2013-06-24",
         "seasons": 3,
-        "creator": "Brian K. Vaughan"
+        "creator": ["Brian K. Vaughan"]
     },
     {
         "id": 13,
@@ -136,7 +136,7 @@
         ],
         "premiered": "2014-03-19",
         "seasons": 7,
-        "creator": "Jason Rothenberg"
+        "creator": ["Jason Rothenberg"]
     },
     {
         "id": 14,
@@ -150,7 +150,7 @@
         ],
         "premiered": "2009-09-10",
         "seasons": 8,
-        "creator": "Julie Plec"
+        "creator": ["Julie Plec"]
     },
     {
         "id": 15,
@@ -164,7 +164,7 @@
         ],
         "premiered": "2013-10-03",
         "seasons": 5,
-        "creator": "Julie Plec"
+        "creator": ["Julie Plec"]
     },
     {
         "id": 16,
@@ -178,7 +178,7 @@
         ],
         "premiered": "2010-10-31",
         "seasons": 10,
-        "creator": "Frank Darabont"
+        "creator": ["Frank Darabont"]
     },
     {
         "id": 17,
@@ -192,7 +192,7 @@
         ],
         "premiered": "2009-05-19",
         "seasons": 6,
-        "creator": "Ryan Murphy"
+        "creator": ["Ryan Murphy"]
     },
     {
         "id": 18,
@@ -205,7 +205,7 @@
         ],
         "premiered": "2007-09-24",
         "seasons": 12,
-        "creator": "Chuck Lorre"
+        "creator": ["Chuck Lorre"]
     },
     {
         "id": 19,
@@ -218,7 +218,7 @@
         ],
         "premiered": "1994-09-22",
         "seasons": 10,
-        "creator": "David Crane"
+        "creator": ["David Crane"]
     },
     {
         "id": 20,
@@ -231,7 +231,7 @@
         ],
         "premiered": "2005-03-27",
         "seasons": 16,
-        "creator": "Shonda Rhimes"
+        "creator": ["Shonda Rhimes"]
     },
     {
         "id": 21,
@@ -245,7 +245,7 @@
         ],
         "premiered": "2016-09-19",
         "seasons": 4,
-        "creator": "Michael Schur"
+        "creator": ["Michael Schur"]
     },
     {
         "id": 22,
@@ -259,7 +259,7 @@
         ],
         "premiered": "2011-04-17",
         "seasons": 8,
-        "creator": "David Benioff"
+        "creator": ["David Benioff"]
     }
 
 
