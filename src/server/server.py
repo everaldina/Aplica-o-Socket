@@ -29,7 +29,6 @@ while(1):
         # list com os dados buscados por uma categoria 'type' com o termo 'search'
         list = []
         list = searchFiles(search, type)
-        print(list)
         json_data = json.dumps(list) # transforma a lista em um json
         
         # Envia o tamanho dos dados
