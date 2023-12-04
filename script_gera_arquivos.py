@@ -13,4 +13,4 @@ def create_folders_and_files(ini, fim, x, max_bytes):
 
 # Example usage
 create_folders_and_files(1, 15, 10, 5000)
-create_folders_and_files(16, 22, 10, 100000)
+create_folders_and_files(16, 22, 10, 10000)
