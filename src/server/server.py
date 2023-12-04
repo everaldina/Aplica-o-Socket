@@ -28,6 +28,7 @@ while(1):
         # list com os dados buscados por uma categoria 'type' com o termo 'search'
         list = []
         list = searchFiles(search, type)
+        print(list)
         json_data = json.dumps(list) # transforma a lista em um json
         
         # Envia o tamanho dos dados
@@ -60,9 +61,11 @@ while(1):
         
         # envia o tamanho do arquivo
         data_size = len(data)
-        client_connection.send(str(data_size)).encode()
+        client_connection.send(str(data_size).encode())
+        print("Enviando tamanho dos dados")
         
         # Aguarda retorno do cliente para envio dos dados
+        print("Aguardando retorno do cliente para envio dos dados")
         client_connection.recv(1024)
         
         # Envia os dados em partes
@@ -77,6 +80,7 @@ while(1):
         client_connection.close()
         print("Fechando socket do servidor")
         servidor_socket.close()
+        break
     else: # se for um stream desconhecido
         print("Erro: Comando desconhecido")
         client_connection.close()

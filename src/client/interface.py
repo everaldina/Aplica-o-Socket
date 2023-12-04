@@ -1,5 +1,5 @@
 import os
-from client import searchFile, streamFile
+from client import searchFile, streamFile, closeServer
 import json
 
 def main():
@@ -15,6 +15,13 @@ def main():
         opc = input("Busca por: ")
             
         busca = menu(opc)
+        
+        # --- é usado para separar os dados enviados ao servidor e nao pode ser usado como busca
+        if busca is not None and "---" in busca:
+            print("Cadeia de caracterer '---' invalido")
+            input()
+            #limpar_terminal()
+            continue
         
         if busca is None:
             continue
@@ -32,26 +39,26 @@ def main():
                 procura_por = "tipo"
         list = searchFile(busca, procura_por)
         
-        limpar_terminal()
+        #limpar_terminal()
         logo_pequena()
         print(f"-------Resultados-------")
-        ids = print_media(list)
-        if len(ids) == 0:
+        if len(list) == 0:
             print("Nenhum resultado encontrado")
             input()
-            limpar_terminal()
+            #limpar_terminal()
             continue
         else:
+            ids = print_media(list)
             id_selected = input("Selecione o id para assistir ou 0 para voltar: ")
             if id_selected == "0":
                 continue
             if id_selected not in ids:
                 print("Opcao invalida")
                 input()
-                limpar_terminal()
+                #limpar_terminal()
                 continue
             else:
-                limpar_terminal()
+                #limpar_terminal()
                 for i in list:
                     if str(i["id"]) == id_selected:
                         selected = i
@@ -60,7 +67,7 @@ def main():
                 streamFile(id_selected)
                 print("Fim.......")
                 input("Pressione enter para voltar ao menu principal......")
-                limpar_terminal()
+                #limpar_terminal()
                     
         
         
@@ -76,18 +83,19 @@ def menu(opc):
     except:
         print("Opcao invalida")
         input()
-        limpar_terminal()
+        #limpar_terminal()
         return
     if(opc == 0):
         print("Saindo...")
+        closeServer()
         exit()
     elif(opc < 1 or opc > 5):
         print("Opcao invalida")
         input()
-        limpar_terminal()
+        #limpar_terminal()
         return
     else:
-        limpar_terminal()
+        #limpar_terminal()
         logo_pequena()
         print(textos[opc-1])
         if(opc == 5):
@@ -98,7 +106,7 @@ def menu(opc):
             except:
                 print("Opcao invalida")
                 input()
-                limpar_terminal()
+                #limpar_terminal()
                 return
             if opc == 1:
                 busca = "filme"
@@ -107,7 +115,7 @@ def menu(opc):
             else:
                 print("Opcao invalida")
                 input()
-                limpar_terminal()
+                #limpar_terminal()
                 return
         else:
             busca = input(f"Digite o {tipo[opc-1]}: ")
@@ -128,7 +136,7 @@ def print_media(list):
     ids = []
     for i in list:
         print(f'{i["id"]} - \t{i["title_ptBR"]} ({i["original_title"]})')
-        if i["type"] == "movie":
+        if i["type"] == "filme":
             print("\t   - Filme")
             print(f'\t   - Ano: {i["year"]}\n\t   - Duracao{i["duration"]} min')
         else:
@@ -138,22 +146,25 @@ def print_media(list):
     return ids
 
 def logo_grande():
+    ''' Imprime o logo do CiCflix grande'''
     print("\n")
-    print("  ,ad8888ba,   88    ,ad8888ba,      ad88  88  88")
-    print(" d8'      `8b  88   d8'      `8b    d8     88  88  8b,     ,d8")
-    print("d8'            88  d8'              88                   88")
-    print("88             88  88             MM88MMM  88  88  `Y8, ,8P'")
-    print("88             88  88               88     88  88    )888(")
-    print("Y8,            88  Y8,              88     88  88   ,d8 8b,")
-    print(" `Y8888Y'      88    `Y8888Y'       88     88  88  8P'     `Y8")
+    print('  ,ad8888ba,   88    ,ad8888ba,      ad88  88  88')
+    print(' d8\'     `"8b  88   d8"\'    `"8b    d8"    88  "" ')
+    print('d8\'            88  d8\'              88            8b,     ,d8')
+    print('88             88  88             MM88MMM  88  88  `Y8, ,8P\'')
+    print('88             88  88               88     88  88    )888(')
+    print('Y8,            88  Y8,              88     88  88   ,d8 8b,')
+    print(' Y8a.    .a8P  88   Y8a.    .a8P    88     88  88   ,d8" "8b,')
+    print('  `"Y8888Y\'    88    `"Y8888Y"\'     88     88  88  8P\'     `Y8')
     print()
 
 def logo_pequena():
+    ''' Imprime o logo do CiCflix pequena '''
     print("\n")
     print("\t\t   ___ ___  ___    __ _ _ ")
     print("\t\t  / __|_ _|/ __|  / _| (_)_ __")
-    print("\t\t | (__ | |  (__  |  _| |  \\ \\")
-    print("\t\t  \\___|___|\\___| |_| |_|_/__/")
+    print("\t\t | (__ | |  (__  |  _| | \\ \\ /")
+    print("\t\t  \\___|___|\\___| |_| |_|_/_\_\\")
     print()
     
 if __name__ == "__main__":
