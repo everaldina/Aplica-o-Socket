@@ -3,14 +3,16 @@ from CiCflix import searchFiles, searchFile
 import json
 
 #Criar o socket TCP/IP
-host = '127.0.0.1'
+host = '192.168.1.3'
 port = 12345
+print("Criando socket TCP/IP")
 servidor_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 servidor_socket.bind((host, port))
-
+print("Socket criado")
 
 # Colocar o socket para escutar conexões
 servidor_socket.listen()
+print("Socket escutando conexões")
 
 # loop enquanto o servidor estiver rodando
 while(1):
@@ -25,7 +27,6 @@ while(1):
     if(stream[0] == "search"): # Se for uma solicitação de busca
         search = stream[1]
         type = stream[2]
-        
         # list com os dados buscados por uma categoria 'type' com o termo 'search'
         list = []
         list = searchFiles(search, type)

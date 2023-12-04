@@ -5,7 +5,7 @@ def createConection():
     ''' Cria uma conexão com o servidor com host e porta especificados e retorna o socket criado'''
     
     # variaveis de conexao
-    host = "127.0.0.1"
+    host = "192.168.1.3"
     port = 12345
     
     # criar socket
@@ -24,13 +24,9 @@ def searchFile(search, type):
     connection = createConection() # Cria conexão com o servidor
 
     
-    # Envia o tipo de operacao que ira ser realizada
-    connection.send("search---".encode())
-    
-    # Envia os dados da busca
-    connection.send(search.encode())
-    connection.send("---".encode())
-    connection.send(type.encode())
+    # Envia o tipo de operacao e o cabecalho
+    cabecalho = f"search---{search}---{type}"
+    connection.send(cabecalho.encode())
     
     
     list = []
@@ -64,11 +60,9 @@ def streamFile(id):
     
     connection = createConection() # Cria conexão com o servidor
     
-    # Envia o tipo de operacao que ira ser realizada
-    connection.send("stream---".encode())
-    
-    # Envia id da midia
-    connection.send(id.encode())
+    # Envia o tipo de operacao que ira ser feita e o cabecalho
+    cabecalho = f"stream---{id}"
+    connection.send(cabecalho.encode())
     
     # Recebe o tamanho dos dados e manda confirmação de que está pronto para receber
     try:
