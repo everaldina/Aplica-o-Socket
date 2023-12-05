@@ -43,7 +43,7 @@ O arquivo `cliente.py` faz a conexão com o servidor e envia as requisições pa
 O arquivo `interface.py` faz a interface com o usuário, e é responsável por receber os comandos do usuário e enviar para o `cliente.py` fazer as requisições.
 
 ## Como executar
-Para executar o projeto é necessário ter o python instalado, o projeto foi feito utilizando a versão 3.11.2 do python, mas deve funcionar em versões mais antigas do pyhton 3.
+Para executar o projeto é necessário ter o python instalado, o projeto foi feito utilizando a versão 3.11.2 do python, para execução da interface do cliente é necessario ter o python 3.10 ou superior.
 
 Para executar o projeto é necessário executar o arquivo `server.py` e o arquivo `interface.py`, o arquivo `server.py` deve ser executado primeiro, pois o arquivo `interface.py` depende dele para funcionar.
 
@@ -68,7 +68,7 @@ A tres tipos de mensagens, as de requisição, as de resposta e as de confirmaç
   - Streaming: stream---"id"
     - id: O id do item que o cliente quer ver.
   - Sair: "end---"
-- **Mensagens de resposta:** Mensagens do servidor, que faz uma busca nos dados de acordo com solicitação do cliente e retorna os dados que batem com a busca. Uma das formas de resposta é o envio de um arquivo com indices de itens que batem com a busca, a outra forma é o envio do arquivo de um item que o cliente solicitou.
+- **Mensagens de resposta:** Mensagens do servidor, que faz uma busca nos dados de acordo com solicitação do cliente e retorna os dados que batem com a busca. Uma das formas de resposta é o envio de um arquivo com indices de itens que batem com a busca, a outra forma é o envio do arquivo de um item que o cliente solicitou. As respostas não sao mandadas de uma vez, elas sao mandadas em pacotes de 1024 bytes.
 - **Mensagens de confirmação:** Mensagens de confirmação são mensagens que o cliente envia para o servidor para confirmar que ele recebeu a mensagem do servidor. Isso acontece quando o servidor envia o tamanho dos dados de resposta e o cliente manda um OK, ou quando o servidor envia a resposta e o cliente manda um DONE.
 
 ### Eventos e Estados
@@ -102,22 +102,29 @@ A tres tipos de mensagens, as de requisição, as de resposta e as de confirmaç
    - Servidor: Com socket fechado.
 
 
-### Exemplos de Execução
+### Comunicaçao
 Exemplo de execução para o cliente procurar um item por titulo com a palavra 'harry', selecionar o filme 'Harry Potter and the Sorcerer's Stone' com id 1 e então sair do programa.
 
 1. Cliente: search---harry---title
 2. Servidor: <tamanho_da_resposta>
 3. Clientr: OK
 4. Servidor: [{"id": 1, "original_title": "Harry Potter and the Sorcerer's Stone", "title_ptBR": "Harry Potter e a Pedra Filosofal", "type": "filme", "genres": ["Adventure", "Fantasy", "Family"], "year": 2001, "duration": 152, "director": ["Chris Columbus"]}]
+   - O servidor envia a resposta em pacotes de 1024 bytes.
 5. Cliente: DONE
---Fim da busca--
-1. Cliente: strem---1
-2. Servidor: <tamanho_do_arquivo>
-3. Cliente: OK
-4. Servidor: <arquivo>
-5. Cliente: DONE
+   
+  --Fim da busca--
+
+6. Cliente: stream---1
+7. Servidor: <tamanho_do_arquivo>
+8. Cliente: OK
+9. Servidor: <arquivo_>
+   - O servidor envia o arquivo em pacotes de 1024 bytes.
+10. Cliente: DONE
+   
 --Fim do streaming--
-6. Cliente: end---
+1. Cliente: end---
+
+Todas as mensagens são enviadas codificadas e o receptor decodifica elas.
 
 
 ### Requisitos minimos de funcionamento
